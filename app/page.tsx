@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import ProblemsSolutions from "@/components/ProblemsSolutions";
 import Features from "@/components/Features";
 import InteractiveDemo from "@/components/InteractiveDemo";
-import BookingSection from "@/components/BookingSection";
+import PatientBookingSection from "@/components/PatientBookingSection";
 import Pricing from "@/components/Pricing";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -16,7 +16,7 @@ export default function HomePage() {
       <ProblemsSolutions />
       <Features />
       <InteractiveDemo />
-      <BookingSection />
+      <PatientBookingSection />
       <Pricing />
       <FinalCTA />
       <Footer />

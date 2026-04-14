@@ -35,26 +35,6 @@ export default function Hero() {
             <LeadForm size="large" />
           </div>
 
-          {/* Social proof */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-[#52525b]">
-            <div className="flex items-center gap-2">
-              <div className="flex -space-x-2">
-                {["АК", "МС", "ДА", "РИ"].map((initials, i) => (
-                  <div
-                    key={i}
-                    className="w-7 h-7 rounded-full bg-[#18181b] border-2 border-[#09090b] flex items-center justify-center text-[9px] font-medium text-[#68a5e8]"
-                  >
-                    {initials}
-                  </div>
-                ))}
-              </div>
-              <span>Более 20 клиник в Бишкеке</span>
-            </div>
-            <div className="w-px h-4 bg-[#27272a]" />
-            <span>⭐ 4.9 из 5 — средняя оценка</span>
-            <div className="w-px h-4 bg-[#27272a]" />
-            <span>Настройка за 1 день</span>
-          </div>
         </div>
 
         {/* Hero image / preview strip */}
