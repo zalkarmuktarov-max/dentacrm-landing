@@ -63,11 +63,6 @@ const upcomingBookings = [
   { date: "22.04.2026", time: "10:00", doctor: "Д-р Марат", service: "Имплант (контроль)", status: "upcoming" },
 ];
 
-const aiReplies: Record<string, string> = {
-  "сколько стоит имплант": "Имплант Osstem (Корея) — 35 000 сом, Straumann (Швейцария) — 55 000 сом. В стоимость входит установка и формирователь десны. Записать на бесплатную консультацию?",
-  "больно": "Мы используем современные анестетики — Ubistezin, Septanest. Вы не почувствуете боли. При необходимости доступна седация.",
-  "часы работы": "Пн—Пт: 09:00—18:00, Сб: 09:00—15:00, Вс: выходной.",
-};
 
 function BookingWidget() {
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -85,9 +80,8 @@ function BookingWidget() {
   const [accCode, setAccCode] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const [chatInput, setChatInput] = useState("");
-  const [chatMsgs, setChatMsgs] = useState<{ from: string; text: string }[]>([]);
-  const [typing, setTyping] = useState(false);
+  const [chatMsgs] = useState<{ from: string; text: string }[]>([]);
+  const [typing] = useState(false);
   const chatRef = useRef<HTMLDivElement>(null);
 
   const pickDoctor = (id: number | null | "any") => { setSelDoctor(id); setExpanded("services"); };
@@ -101,19 +95,6 @@ function BookingWidget() {
   const totalD = selSvcs.reduce((a, id) => a + (svcList.find(s => s.id === id)?.duration || 0), 0);
   const canConfirm = selSvcs.length > 0 && selDate !== null && selTime && bName && bPhone;
 
-  const sendChat = () => {
-    if (!chatInput.trim()) return;
-    const msg = chatInput.trim();
-    setChatMsgs(p => [...p, { from: "user", text: msg }]);
-    setChatInput("");
-    setTyping(true);
-    setTimeout(() => {
-      const key = Object.keys(aiReplies).find(k => msg.toLowerCase().includes(k));
-      const reply = key ? aiReplies[key] : "Хороший вопрос! Наш специалист ответит подробно на приёме, или напишите в WhatsApp: +996 555 123 456";
-      setChatMsgs(p => [...p, { from: "ai", text: reply }]);
-      setTyping(false);
-    }, 1400);
-  };
 
   useEffect(() => {
     if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
@@ -391,7 +372,7 @@ function BookingWidget() {
         {chatMsgs.length === 0 && (
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
             {["Сколько стоит имплант?", "Больно ли лечить?", "Часы работы"].map((q, i) => (
-              <button key={i} onClick={() => setChatInput(q)} style={{ padding: "6px 12px", borderRadius: 8, border: `1px solid ${C.border}`, background: "transparent", color: C.textMuted, fontSize: 12, fontFamily: font, cursor: "pointer" }}>
+              <button key={i} disabled style={{ padding: "6px 12px", borderRadius: 8, border: `1px solid ${C.border}`, background: "transparent", color: C.textMuted, fontSize: 12, fontFamily: font, cursor: "default" }}>
                 {q}
               </button>
             ))}
@@ -399,10 +380,10 @@ function BookingWidget() {
         )}
 
         <div style={{ display: "flex", gap: 8 }}>
-          <input value={chatInput} onChange={e => setChatInput(e.target.value)} onKeyDown={e => e.key === "Enter" && sendChat()} placeholder="Напишите вопрос..."
-            style={{ flex: 1, padding: "11px 14px", borderRadius: 10, border: `1px solid ${C.border}`, background: C.card, color: C.text, fontSize: 13, fontFamily: font, outline: "none" }} />
-          <button onClick={sendChat} style={{ width: 42, height: 42, borderRadius: 10, border: "none", background: chatInput.trim() ? C.blue : C.cardAlt, display: "flex", alignItems: "center", justifyContent: "center", cursor: chatInput.trim() ? "pointer" : "default", flexShrink: 0 }}>
-            {I.send(16, chatInput.trim() ? "#fff" : C.textDim)}
+          <input value="" readOnly placeholder="Напишите вопрос..."
+            style={{ flex: 1, padding: "11px 14px", borderRadius: 10, border: `1px solid ${C.border}`, background: C.card, color: C.text, fontSize: 13, fontFamily: font, outline: "none", cursor: "default" }} />
+          <button disabled style={{ width: 42, height: 42, borderRadius: 10, border: "none", background: C.cardAlt, display: "flex", alignItems: "center", justifyContent: "center", cursor: "default", flexShrink: 0 }}>
+            {I.send(16, C.textDim)}
           </button>
         </div>
       </div>
