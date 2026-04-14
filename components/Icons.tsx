@@ -1,6 +1,6 @@
 export const ToothIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 2C9 2 7 4 7 6c0 1 .5 2 1 3L7 19c0 1.5.8 3 2 3s2-1.5 2-3v-2h2v2c0 1.5.8 3 2 3s2-1.5 2-3l-1-10c.5-1 1-2 1-3 0-2-2-4-5-4z" />
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" style={{ opacity: 0.85 }}>
+    <path d="M12 2C9.5 2 7.5 3 6.5 5C5.5 7 5 9 5 11C5 13 5.5 15.5 6 17C6.5 18.5 7 20 7.5 21C7.8 21.6 8.2 22 9 22C9.8 22 10.2 21.4 10.5 20.5C10.8 19.5 11 18 11 16.5C11 15.5 11.5 15 12 15C12.5 15 13 15.5 13 16.5C13 18 13.2 19.5 13.5 20.5C13.8 21.4 14.2 22 15 22C15.8 22 16.2 21.6 16.5 21C17 20 17.5 18.5 18 17C18.5 15.5 19 13 19 11C19 9 18.5 7 17.5 5C16.5 3 14.5 2 12 2Z" />
   </svg>
 );
 
