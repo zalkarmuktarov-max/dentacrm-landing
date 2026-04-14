@@ -3,30 +3,30 @@ import { useState } from "react";
 import { ArrowRightIcon, CheckIcon } from "./Icons";
 
 interface LeadFormProps {
-  placeholder?: string;
   buttonText?: string;
   size?: "default" | "large";
 }
 
 export default function LeadForm({
-  placeholder = "Ваш номер телефона (WhatsApp)",
   buttonText = "Получить демо",
   size = "default",
 }: LeadFormProps) {
+  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!phone.trim()) return;
+    if (!phone.trim() || !name.trim()) return;
     setStatus("loading");
     try {
       await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: phone.trim(), source: "landing" }),
+        body: JSON.stringify({ name: name.trim(), phone: phone.trim(), source: "landing" }),
       });
       setStatus("success");
+      setName("");
       setPhone("");
     } catch {
       setStatus("error");
@@ -48,15 +48,26 @@ export default function LeadForm({
   }
 
   const isLarge = size === "large";
+  const inputCls = `w-full bg-[#111113] border border-[#27272a] rounded-xl text-[#e4e4e7] placeholder-[#52525b] focus:outline-none focus:border-[#68a5e8] transition-colors ${
+    isLarge ? "px-5 py-4 text-base" : "px-4 py-3 text-sm"
+  }`;
 
   return (
-    <form onSubmit={handleSubmit} className="w-full">
-      <div className={`flex ${isLarge ? "flex-col sm:flex-row" : "flex-col sm:flex-row"} gap-3`}>
+    <form onSubmit={handleSubmit} className="w-full space-y-3">
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Ваше имя и отчество"
+        className={inputCls}
+        disabled={status === "loading"}
+      />
+      <div className="flex flex-col sm:flex-row gap-3">
         <input
           type="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          placeholder={placeholder}
+          placeholder="Номер телефона"
           className={`flex-1 bg-[#111113] border border-[#27272a] rounded-xl text-[#e4e4e7] placeholder-[#52525b] focus:outline-none focus:border-[#68a5e8] transition-colors ${
             isLarge ? "px-5 py-4 text-base" : "px-4 py-3 text-sm"
           }`}
@@ -64,7 +75,7 @@ export default function LeadForm({
         />
         <button
           type="submit"
-          disabled={status === "loading" || !phone.trim()}
+          disabled={status === "loading" || !phone.trim() || !name.trim()}
           className={`flex items-center justify-center gap-2 bg-[#68a5e8] hover:bg-[#8bbcf0] disabled:opacity-50 disabled:cursor-not-allowed text-[#09090b] font-semibold rounded-xl transition-colors whitespace-nowrap ${
             isLarge ? "px-7 py-4 text-base" : "px-5 py-3 text-sm"
           }`}
@@ -77,9 +88,6 @@ export default function LeadForm({
           {buttonText}
         </button>
       </div>
-      <p className="mt-3 text-[#52525b] text-xs">
-        14 дней бесплатно · Без карты · Настроим за вас
-      </p>
     </form>
   );
 }

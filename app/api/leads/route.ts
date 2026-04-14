@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { phone, source = "landing" } = body;
+    const { name, phone, source = "landing" } = body;
 
     if (!phone || typeof phone !== "string" || phone.trim().length < 5) {
       return NextResponse.json({ error: "Invalid phone" }, { status: 400 });
@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          name: name?.trim() ?? "",
           phone: phone.trim(),
           source,
           timestamp: new Date().toISOString(),
@@ -24,7 +25,7 @@ export async function POST(req: NextRequest) {
       });
     } else {
       // Dev mode — log to console
-      console.log("[Lead]", { phone: phone.trim(), source, timestamp: new Date().toISOString() });
+      console.log("[Lead]", { name: name?.trim(), phone: phone.trim(), source, timestamp: new Date().toISOString() });
     }
 
     return NextResponse.json({ ok: true });
