@@ -31,7 +31,7 @@ export default function FinalCTA() {
 
           {/* WhatsApp */}
           <a
-            href="https://wa.me/PLACEHOLDER_PHONE"
+            href="https://wa.me/79852993980"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20c05c] text-white font-semibold text-base px-8 py-4 rounded-xl transition-colors w-full sm:w-auto min-w-[220px]"
