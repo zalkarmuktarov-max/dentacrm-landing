@@ -15,7 +15,6 @@ export default function Navbar() {
   const links = [
     { href: "#features", label: "Возможности" },
     { href: "#demo", label: "Демо" },
-    { href: "#pricing", label: "Тарифы" },
     { href: "#contact", label: "Контакты" },
   ];
 

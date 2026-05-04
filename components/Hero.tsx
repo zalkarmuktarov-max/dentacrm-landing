@@ -1,4 +1,3 @@
-import LeadForm from "./LeadForm";
 import { ToothIcon, DashboardIcon, CalendarIcon, PatientsIcon, FinanceIcon, GearIcon } from "./Icons";
 
 const appointments = [
@@ -60,21 +59,37 @@ export default function Hero() {
           </div>
 
           {/* H1 */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#e4e4e7] leading-tight mb-6 text-balance">
+          <h1 className="text-[26px] sm:text-5xl lg:text-6xl font-bold text-[#e4e4e7] leading-tight mb-6 text-balance break-words [overflow-wrap:break-word]">
             CRM система для стоматологий —{" "}
             <span className="text-[#68a5e8]">все процессы</span>{" "}
             от записи клиента до учёта финансов в одном экране
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-[#a1a1aa] mb-10 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-xl text-[#a1a1aa] mb-10 max-w-3xl mx-auto leading-relaxed">
             Онлайн-запись, учёт пациентов, аналитика, зубная формула и AI-ассистент
             для ваших клиентов. Получите доступ к демо-версии прямо сейчас
           </p>
 
-          {/* Form */}
-          <div className="max-w-xl mx-auto mb-14">
-            <LeadForm size="large" />
+          {/* CTA buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-14">
+            <a
+              href="https://t.me/fin_cognitai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2.5 bg-[#0088cc] hover:bg-[#0077b5] text-white font-semibold text-base px-7 py-3.5 rounded-xl transition-colors w-full sm:w-auto"
+            >
+              <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0" fill="currentColor">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+              </svg>
+              Написать в Telegram
+            </a>
+            <a
+              href="#contact"
+              className="flex items-center justify-center gap-2.5 bg-[#18181b] hover:bg-[#27272a] border border-[#3f3f46] text-[#e4e4e7] font-semibold text-base px-7 py-3.5 rounded-xl transition-colors w-full sm:w-auto"
+            >
+              Узнать подробнее
+            </a>
           </div>
         </div>
 
@@ -82,8 +97,8 @@ export default function Hero() {
         <div className="relative">
           <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#09090b] to-transparent z-10 pointer-events-none" />
           <div className="bg-[#111113] border border-[#27272a] rounded-2xl overflow-hidden shadow-2xl shadow-black/60">
-            {/* Browser chrome */}
-            <div className="flex items-center gap-3 px-4 py-3 bg-[#0d0d0f] border-b border-[#27272a]">
+            {/* Browser chrome — hidden on mobile */}
+            <div className="hidden sm:flex items-center gap-3 px-4 py-3 bg-[#0d0d0f] border-b border-[#27272a]">
               <div className="flex gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-[#d45b5b]" />
                 <div className="w-3 h-3 rounded-full bg-[#d4a94e]" />
@@ -135,7 +150,7 @@ export default function Hero() {
                   {/* Left column */}
                   <div className="flex-1 min-w-0 space-y-3 overflow-hidden">
                     {/* KPI grid */}
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {kpis.map((kpi, i) => (
                         <div key={i} className="bg-[#18181b] rounded-xl p-2.5 border border-[#27272a]">
                           <p className="text-[#52525b] text-[9px] mb-0.5 truncate">{kpi.label}</p>
@@ -168,8 +183,8 @@ export default function Hero() {
                     </div>
                   </div>
 
-                  {/* Right column */}
-                  <div className="w-44 flex-shrink-0 space-y-3">
+                  {/* Right column — hidden on mobile */}
+                  <div className="hidden sm:flex flex-col w-44 flex-shrink-0 space-y-3">
                     {/* Doctor load */}
                     <div className="bg-[#18181b] rounded-xl border border-[#27272a] p-3">
                       <p className="text-[#e4e4e7] text-[11px] font-medium mb-2.5">Загрузка врачей</p>
